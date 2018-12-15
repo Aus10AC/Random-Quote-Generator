@@ -6,43 +6,45 @@ FSJS project 1 - A Random Quote Generator
 var quotes = [
     {
        quote: 'A gamertag is an aggregation of all the actions you have done in competition...',
-       source: 'Twitter @ TLstuchiu',
-       citation: 'Twitter',
+       source: 'TLstuchiu',
+       citation: '<a href="#">Twitter</a>',
        year: 1993
     },
     {
        quote: 'After making all the mistakes, every player has a chance to turn the outcome of the game around by making the right moves next.',
        source: 'Zoltan Andrejkovics',
-       citation: 'Twitter',
+       citation: '<a href="#">Twitter</a>',
        year: 1993
     },
     {
        quote: "I'm probably the best SnD player in the world",
        source: 'Adam Killa Sloss',
-       citation: 'Twitter',
+       citation: '<a href="#">Twitter</a>',
        year: 1993
     },
     {
        quote: 'There are millions of sci-fi enthusiasts in the world, not jsut gamers',
        source: 'Brendan Iribe',
-       citation: 'Twitter',
+       citation: '<a href="#">Twitter</a>',
        year: 1993
     },
     {
-       quote: 'Who needs sports stardom when you can shoot fireballs from your fingertips?',
-       source: 'Ethan Gilsdorf',
-       citation: 'Twitter',
+       quote: 'Success is not final, failure is not fatal: it is the courage to continue that counts',
+       source: 'Winston Churchill',
+       citation: '<a href="#">Twitter</a>',
        year: 1993
     },
 ];
 
 // generates a random quote
+
 function getRandomQuote(  ) {
   var quoteList = Math.floor(( Math.random() * ( quotes.length ) ) );
   return quotes[quoteList];
 }
 
-// Prints a random quote to the HTML document when called
+// Prepares a random quote to be printed to the document once called
+
 function printQuote( ) {
   var recieveQuote = getRandomQuote();
   var message = '';
@@ -52,24 +54,33 @@ function printQuote( ) {
     message += "<span class='year'>" + recieveQuote.year + "</span>"
     message += "</p>";
     document.getElementById('quote-box').innerHTML = message;
-}
-
-// Changes background color on click
-var rgb;
-
-function changeColor( ) {
-  var colorGenerator = Math.floor(Math.random() * 256 );
-  for ( var i = 0; i < 10; i += 1 ) {
-    rgb = 'rgb(' + colorGenerator + ',' + colorGenerator + ',' + colorGenerator + ')';
-  }
-  html = document.getElementById('color').onclick = changeColor;
-  html += '<div id="color" style="background-color:' + rgb + '"></div>';
-}
-
-changeColor();
-
-// Provides a quote upon first view
+}   // Starts the page off with a quote instead of a blank screen
 printQuote();
 
+// Generates random RGB color
+
+var rgb;
+function rgbColor( ) {
+  var red = Math.floor(Math.random() * 256 );
+  var green = Math.floor(Math.random() * 256 );
+  var blue = Math.floor(Math.random() * 256 );
+  rgb = 'rgb(' + red + ',' + green + ',' + blue + ')';
+  return rgb;
+}
+
+// Auto-refreshes Quotes
+
+setInterval( function() {
+  document.getElementById('color').style.background = rgbColor();
+  printQuote();
+}, 5000);
+
+// changes background color on click
+
+document.getElementById('loadQuote').addEventListener("click", function() {
+  document.getElementById('color').style.background = rgbColor();
+});
+
 // Listens for functions
+
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
