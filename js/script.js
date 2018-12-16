@@ -3,7 +3,7 @@ Treehouse Techdegree:
 FSJS project 1 - A Random Quote Generator
 ******************************************/
 
-var quotes = [
+const quotes = [
     {
        quote: 'A gamertag is an aggregation of all the actions you have done in competition...',
        source: 'TLstuchiu',
@@ -38,47 +38,50 @@ var quotes = [
 
 // generates a random quote
 
-function getRandomQuote(  ) {
-  var quoteList = Math.floor(( Math.random() * ( quotes.length ) ) );
-  return quotes[quoteList];
+const getRandomQuote = ( ) => {
+  let quoteList = Math.floor(( Math.random( ) * ( quotes.length ) ) );
+  return quotes[ quoteList ];
 }
 
 // Prepares a random quote to be printed to the document once called
 
-function printQuote( ) {
-  var recieveQuote = getRandomQuote();
-  var message = '';
-    message = "<p class='quote'>" + recieveQuote.quote + "</p>";
-    message += "<p class='source'>" + recieveQuote.source;
-    message += "<span class='citation'>" + recieveQuote.citation + "</span>";
-    message += "<span class='year'>" + recieveQuote.year + "</span>"
-    message += "</p>";
-    document.getElementById('quote-box').innerHTML = message;
+const printQuote = ( ) => {
+  let recieveQuote = getRandomQuote( );
+  let message = '';
+    message =
+    `
+      <p class='quote'> ${recieveQuote.quote} </p>
+      <p class='source'> ${recieveQuote.source}
+        <span class='citation'> ${recieveQuote.citation} </span>
+        <span class='year'> ${recieveQuote.year} </span>
+      </p>
+    `
+    document.getElementById( 'quote-box' ).innerHTML = message;
 }   // Starts the page off with a quote instead of a blank screen
 printQuote();
 
 // Generates random RGB color
 
-var rgb;
-function rgbColor( ) {
-  var red = Math.floor(Math.random() * 256 );
-  var green = Math.floor(Math.random() * 256 );
-  var blue = Math.floor(Math.random() * 256 );
+let rgb;
+const rgbColor = ( ) => {
+  const red = Math.floor( Math.random( ) * 256 );
+  const green = Math.floor( Math.random ( ) * 256 );
+  const blue = Math.floor( Math.random ( ) * 256 );
   rgb = 'rgb(' + red + ',' + green + ',' + blue + ')';
   return rgb;
 }
 
 // Auto-refreshes Quotes
 
-setInterval( function() {
-  document.getElementById('color').style.background = rgbColor();
-  printQuote();
+setInterval( () => {
+  document.getElementById( 'color' ).style.background = rgbColor( );
+  printQuote( );
 }, 5000);
 
 // changes background color on click
 
-document.getElementById('loadQuote').addEventListener("click", function() {
-  document.getElementById('color').style.background = rgbColor();
+document.getElementById( 'loadQuote' ).addEventListener( "click", ( ) =>  {
+  document.getElementById( 'color' ).style.background = rgbColor( );
 });
 
 // Listens for functions
